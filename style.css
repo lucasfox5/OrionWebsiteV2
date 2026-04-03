@@ -17,12 +17,19 @@
     list-style: none;
     display: flex;
     gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline-block;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
     font-size: 16px;
+    transition: 0.2s;
 }
 
 .nav-links a:hover {
@@ -74,3 +81,10 @@ footer {
     margin-top: 80px;
     color: #888;
 }
+
+/* GENERAL */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
