@@ -2,9 +2,11 @@ async function checkVerification() {
     const username = localStorage.getItem("verifyUser");
     const code = localStorage.getItem("verifyCode");
 
-    if (!username || !code) return alert("No verification in progress");
+    if (!username || !code) {
+        alert("No verification in progress");
+        return window.location.href = "login.html";
+    }
 
-    // Get userId
     const userRes = await fetch(`https://api.roblox.com/users/get-by-username?username=${username}`);
     const userData = await userRes.json();
 
@@ -12,16 +14,15 @@ async function checkVerification() {
 
     const userId = userData.Id;
 
-    // Get profile info
     const profileRes = await fetch(`https://users.roblox.com/v1/users/${userId}`);
     const profile = await profileRes.json();
 
-    if (profile.description.includes(code)) {
-        // Success
+    if (profile.description && profile.description.includes(code)) {
         localStorage.setItem("loggedIn", "true");
         localStorage.setItem("userId", userId);
         localStorage.setItem("username", username);
-        window.location.href = "/dashboard.html";
+
+        window.location.href = "dashboard.html";
     } else {
         alert("Code not found in bio. Try again.");
     }
